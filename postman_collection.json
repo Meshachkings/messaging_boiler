@@ -1,0 +1,354 @@
+{
+  "info": {
+    "name": "Chat Application API",
+    "description": "API documentation for the chat application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "User ID"
+                }
+              ]
+            },
+            "description": "Get user details by ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Conversations",
+      "item": [
+        {
+          "name": "Create Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipientId\": \"userId2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations"]
+            }
+          }
+        },
+        {
+          "name": "Get All Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations"]
+            }
+          }
+        },
+        {
+          "name": "Update Last Delivered",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveredAt\": \"2024-03-19T10:00:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations/:id/lastDelivered",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations", ":id", "lastDelivered"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Conversation ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark as Read",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messageId\": \"messageId\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations/:id/markAsRead",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations", ":id", "markAsRead"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Conversation ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Conversation by User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipientId\": \"userId2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations/:userId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "",
+                  "description": "User ID"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "text",
+                  "value": "Hello!",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/chats/:conversationId/messages",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "chats", ":conversationId", "messages"],
+              "variable": [
+                {
+                  "key": "conversationId",
+                  "value": "",
+                  "description": "Conversation ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Messages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/chats/:conversationId/messages",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "chats", ":conversationId", "messages"],
+              "query": [
+                {
+                  "key": "timestamp",
+                  "value": "",
+                  "description": "Optional timestamp for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "conversationId",
+                  "value": "",
+                  "description": "Conversation ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Conversation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/chat/:conversationId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "chat", ":conversationId"],
+              "variable": [
+                {
+                  "key": "conversationId",
+                  "value": "",
+                  "description": "Conversation ID"
+                }
+              ]
+            },
+            "description": "Get conversation details"
+          }
+        },
+        {
+          "name": "Delete Message",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/chat/:conversationId/messages/:messageId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "chat", ":conversationId", "messages", ":messageId"],
+              "variable": [
+                {
+                  "key": "conversationId",
+                  "value": "",
+                  "description": "Conversation ID"
+                },
+                {
+                  "key": "messageId",
+                  "value": "",
+                  "description": "Message ID"
+                }
+              ]
+            },
+            "description": "Delete a message from a conversation"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    }
+  ]
+} 
